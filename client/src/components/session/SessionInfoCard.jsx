@@ -12,7 +12,7 @@ const SessionInfoCard = ({
   onCopyLink,
 }) => {
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+    <div className="premium-card rounded-xl p-6">
       <div className="flex items-center mb-6">
         <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3">
           <FaInfoCircle className="w-6 h-6 text-white" />
@@ -32,12 +32,12 @@ const SessionInfoCard = ({
               type="text"
               value={roomId}
               readOnly
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-gray-50 font-mono text-lg tracking-wider text-center focus:border-blue-500 transition-colors"
+            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50/90 font-mono text-lg tracking-wider text-center focus:border-blue-500 transition-colors"
             />
           </div>
           <button
             onClick={onCopyRoomId}
-            className={`px-5 py-3 rounded-lg font-medium transition-all ${copied ? "bg-green-500 text-white" : "bg-blue-600 text-white hover:bg-blue-700"}`}
+            className={`px-5 py-3 rounded-xl font-medium transition-all ${copied ? "bg-green-500 text-white" : "premium-btn-primary text-white"}`}
           >
             {copied ? (
               <span className="flex items-center">
@@ -63,11 +63,11 @@ const SessionInfoCard = ({
             type="text"
             value={shareableLink}
             readOnly
-            className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-lg bg-gray-50 text-sm  focus:border-green-500 transition-colors"
+            className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50/90 text-sm focus:border-green-500 transition-colors"
           />
           <button
             onClick={onCopyLink}
-            className={`px-5 py-3 rounded-lg font-medium transition-all ${copied ? "bg-green-500 text-white" : "bg-green-600 text-white hover:bg-green-700"}`}
+            className={`px-5 py-3 rounded-xl font-medium transition-all ${copied ? "bg-green-500 text-white" : "bg-green-600 text-white hover:bg-green-700"}`}
           >
             {copied ? "✓" : "Copy"}
           </button>

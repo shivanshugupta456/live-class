@@ -6,7 +6,7 @@ const ParticipantsList = ({participants,hostName}) => {
 
   if(!participants || participants.length === 0){
     return(
-      <div className='bg-white rounded-xl shadow-lg p-6 border border-gray-100 sticky top-4'>
+      <div className='premium-card rounded-xl p-6 sticky top-4'>
         <div className='flex items-center mb-4'>
           <FaUsers className='w-5 h-5 mr-2 text-indigo-600'/>
           <h2 className='text-xl font-bold text-gray-900'>
@@ -28,7 +28,7 @@ const ParticipantsList = ({participants,hostName}) => {
   const hostParticipants = participants.filter((p) => p.userName === hostName);
   const otherParticipants = participants.filter((p) => p.userName !== hostName)
   return (
-    <div className='bg-white rounded-xl shadow-lg p-6 border border-gray-100 sticky top-4'>
+    <div className='premium-card rounded-xl p-6 sticky top-4'>
        <div className='flex items-center mb-4'>
         <FaUsers className='w-5 h-5 mr-2 text-indigo-600'/>
      <h2 className='text-xl font-bold text-gray-900'>

@@ -204,7 +204,7 @@ const HostSession = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center premium-page">
         <div className="text-center">
           <FaSpinner className="animate-spin h-12 w-12 text-blue-600 mx-auto" />
           <p className="mt-4 text-gray-600">
@@ -220,7 +220,7 @@ const HostSession = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen premium-page">
       <SessionHeader
         title={APP_CONFIG.SESSION_CONTENT.HEADER.HOSTING_TITLE}
         roomId={roomId}

@@ -132,7 +132,7 @@ const JoinSession = () => {
     }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50  via-emerald-50 to-teal-50">
+    <div className="min-h-screen premium-page">
       <SessionHeader
         title={APP_CONFIG.SESSION_CONTENT.HEADER.JOINING_TITLE}
         roomId={sessionJoined ? roomId : ''}

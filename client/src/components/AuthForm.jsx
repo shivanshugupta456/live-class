@@ -24,7 +24,7 @@ const AuthForm = ({
   const isLogin = mode === "login";
   return (
     <div
-      className={`min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ${isLogin ? "bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50" : "bg-gradient-to-br from-purple-50 via-pink-50 to-red-50"}`}
+      className={`min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 premium-page ${isLogin ? "" : ""}`}
     >
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
@@ -38,17 +38,17 @@ const AuthForm = ({
             )}
           </div>
 
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-extrabold premium-title mb-2">
             {isLogin ? APP_CONFIG.APP_NAME : `Join ${APP_CONFIG.APP_NAME}`}
           </h1>
-          <p className="text-gray-600">
+          <p className="premium-muted">
             {isLogin
               ? APP_CONFIG.APP_TAGLINE
               : "Start your learning journey today"}
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="premium-card rounded-2xl p-8">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900 text-center">
               {isLogin
@@ -68,7 +68,7 @@ const AuthForm = ({
             onSubmit={onSubmit}
           >
             {(error || localError) && (
-              <div className="bg-red-50 border-1-4 border-red-500 text-red-700 p-4 rounded-lg flex items-start">
+              <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg flex items-start">
                 <FaExclamationCircle className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" />
                 <span className="text-sm">{error || localError}</span>
               </div>
@@ -78,7 +78,7 @@ const AuthForm = ({
               <div>
                 <label
                   htmlFor="name"
-                  className="block tetx-sm font-medium text-gray-700 mb-2"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Full Name
                 </label>
@@ -104,7 +104,7 @@ const AuthForm = ({
             <div>
               <label
                 htmlFor="name"
-                className="block tetx-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Email Address
               </label>
@@ -130,7 +130,7 @@ const AuthForm = ({
                   <div>
               <label
                 htmlFor="name"
-                className="block tetx-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Password
               </label>
@@ -157,7 +157,7 @@ const AuthForm = ({
                        <div>
               <label
                 htmlFor="name"
-                className="block tetx-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2"
               >
                 Confirm Password
               </label>
@@ -185,7 +185,7 @@ const AuthForm = ({
               type="submit"
               disabled={loading}
               className=
-              {`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02]  ${isLogin ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:ring-blue-500' : 'bg-gradient-to-r from-purple-600 to-pink-600  hover:from-purple-700 hover:to-pink-700 focus:ring-purple-500 mt-6'}`}
+              {`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02] ${isLogin ? 'premium-btn-primary focus:ring-blue-500' : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:ring-purple-500 mt-6'}`}
              >
             {loading ? (
                 <>

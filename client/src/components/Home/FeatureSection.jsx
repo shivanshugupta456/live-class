@@ -15,10 +15,10 @@ const FeatureSection = () => {
     <section className='py-20 px-4 sm:px-6 pl:px-8'>
         <div className='max-w-7xl mx-auto'>
             <div className='text-center mb-16'>
-                <h2 className='text-4xl font-bold text-gray-900 mb-4'>
+                <h2 className='text-4xl font-extrabold premium-title mb-4'>
                     {APP_CONFIG.HOME_CONTENT.FEATURES.HEADING}
                 </h2>
-                <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
+                <p className='text-xl premium-muted max-w-2xl mx-auto'>
                     {APP_CONFIG.HOME_CONTENT.FEATURES.DESCRIPTION}
 
                 </p>
@@ -32,7 +32,7 @@ const FeatureSection = () => {
                 {APP_CONFIG.FEATURES.map((feature,index) => {
                   const IconComponent = iconMap[feature.icon];
                   return (
-                    <div key={index} className='bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all transform hover:-translate-y-2'>
+                    <div key={index} className='premium-card premium-card-hover rounded-2xl p-8'>
                           <div className={`w-16 h-16 bg-gradient-to-br ${feature.color === 'blue' ? 'from-blue-500 to-blue-600' : feature.color === 'green' ? 'from-green-500 to-green-600' : feature.color === 'purple' ? 'from-purple-500 to-purple-600' : 'from-indigo-500 to-indigo-600'} rounded-xl flex items-center justify-center text-white mb-6` }>
                             {IconComponent && <IconComponent className='w-8 h-8'/>}
                             </div>

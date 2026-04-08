@@ -7,8 +7,8 @@ import { FaArrowRight } from 'react-icons/fa';
 const CTASection = () => {
   const {isAuthenticated} = useAuth();
   return (
-    <section className='py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-500 to-indigo-600'>
-         <div className='max-w-4xl mx-auto text-center'>
+    <section className='py-20 px-4 sm:px-6 lg:px-8'>
+         <div className='max-w-4xl mx-auto text-center rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 p-12 shadow-2xl'>
           <h2 className='text-4xl font-bold text-white mb-6'>
             {APP_CONFIG.HOME_CONTENT.CTA.HEADING}
           </h2>
@@ -19,14 +19,14 @@ const CTASection = () => {
 
           {isAuthenticated ? (
             <Link to={ROUTES.DASHBOARD} 
-             className='inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-xl hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white font-semibold text-lg shadow-lg transition-all transform hover:scale-105 '
+             className='inline-flex items-center px-8 py-4 bg-white text-blue-700 rounded-xl hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white font-semibold text-lg shadow-lg transition-all transform hover:scale-105 '
             >
               {APP_CONFIG.HOME_CONTENT.CTA.BUTTON_AUTHENTICATED}
               <FaArrowRight className='ml-2'/>
             </Link>
           ): (
              <Link to={ROUTES.REGISTER} 
-             className='inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-xl hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white font-semibold text-lg shadow-lg transition-all transform hover:scale-105 '
+             className='inline-flex items-center px-8 py-4 bg-white text-blue-700 rounded-xl hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white font-semibold text-lg shadow-lg transition-all transform hover:scale-105 '
             >
               {APP_CONFIG.HOME_CONTENT.CTA.BUTTON_GUEST}
               <FaArrowRight className='ml-2'/>

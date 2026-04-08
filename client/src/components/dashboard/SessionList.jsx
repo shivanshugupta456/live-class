@@ -20,10 +20,10 @@ const SessionList = ({
 
 
   return (
-    <div className="mt-16 max-w-5xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+    <div className="mt-16 max-w-5xl mx-auto premium-card rounded-2xl p-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
         <div>
-          <h3 className="text-2xl yexy-gray-900 font-bold">
+          <h3 className="text-2xl text-gray-900 font-bold">
             {APP_CONFIG.DASHBOARD_CONTENT.SESSIONS_LIST.HEADING}
           </h3>
           <p className="text-gray-600">
@@ -36,7 +36,7 @@ const SessionList = ({
           <select
             value={statusFilter}
             onChange={(e) => onFilterChange(e.target.value)}
-            className="py-2 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="py-2 px-3 border border-slate-300 rounded-xl bg-white/90 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="all">
               {APP_CONFIG.DASHBOARD_CONTENT.SESSIONS_LIST.FILTER_ALL}
@@ -65,7 +65,7 @@ const SessionList = ({
           {sessions.map((s) => (
             <div
               key={s.id}
-              className="border border-gray-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-md transition-shadow"
+              className="border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:shadow-lg hover:border-blue-200 transition-all"
             >
               <div>
                 <div className="flex items-center space-x-3">
@@ -99,7 +99,7 @@ const SessionList = ({
                 <button
                   onClick={() => onRejoinSession(s)}
                   disabled={s.status !== "active"}
-                  className="inline-flex items-center px-4  py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg  hover:from-blue-700 hover:to-indigo-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center px-4 py-2 premium-btn-primary text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {s.status === "active" ? (
                     <>

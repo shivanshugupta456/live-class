@@ -6,7 +6,7 @@ import CTASection from '../components/Home/CTASection'
 
 const Home = () => {
   return (
-    <div className='min-h-screen bg-white'>
+    <div className='min-h-screen premium-page'>
         <HeroSection/>
         <FeatureSection/>
         <BenefitsSection/>

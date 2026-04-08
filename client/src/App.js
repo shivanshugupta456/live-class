@@ -55,7 +55,7 @@ function App() {
           }
          }}
       />
-      <div className='min-h-screen flex flex-col bg-gray-50'>
+      <div className='min-h-screen flex flex-col premium-page'>
          <Routes>
           <Route 
           

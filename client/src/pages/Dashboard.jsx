@@ -50,13 +50,13 @@ const Dashboard = () => {
     navigate(ROUTES.JOIN);
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen premium-page">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <WelcomeSection userName={user?.name} />
 
         {error && (
           <div className="max-w-2xl mx-auto mb-8">
-            <div className="bg-red-50 border-1-4 border-red-500 text-red-700 p-4 rounded-lg shadow-sm ">
+            <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-sm ">
               <div className="flex items-center">
                 <FaExclamationCircle className="w-5 h-5 mr-2" />
                 <span>{error}</span>
