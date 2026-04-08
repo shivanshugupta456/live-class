@@ -223,7 +223,8 @@ export const joinRoom = async(roomId,userId,userName,container,onJoinCallback,on
                 scenario:{
                     mode:ZegoUIKitPrebuilt.GroupCall,
                 },
-                showPreJoinView:true,
+                // Avoid waiting on manual pre-join confirmation which can trigger false timeouts.
+                showPreJoinView:false,
                 turnOnCameraWhenJoining:hasPermission,
                 turnOnMicrophoneWhenJoining:hasPermission,
                 showMyCameraToggleButton:true,
