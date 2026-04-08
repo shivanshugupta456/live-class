@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "live-class-server",
+=======
+  "name": "live-class",
+>>>>>>> 4030e73 (hekko)
   "version": "1.0.0",
   "description": "Backend live class mern app",
   "main": "index.js",
