@@ -3,11 +3,7 @@
 
 const errorHandler = (err,req,res,next) => {
     let statusCode = err.statusCode || 500;
-<<<<<<< HEAD
-    let message = err.message | 'Interval server error';
-=======
     let message = err.message || 'Internal server error';
->>>>>>> 4030e73 (hekko)
 
      //Mongoose validation error
     if(err.name === 'ValidationError'){
@@ -43,8 +39,4 @@ const errorHandler = (err,req,res,next) => {
 
 
 
-<<<<<<< HEAD
 export default errorHandler;
-=======
-export default errorHandler;
->>>>>>> 4030e73 (hekko)
