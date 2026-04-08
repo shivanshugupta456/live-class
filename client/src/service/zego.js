@@ -5,6 +5,7 @@ import { ZEGO_CONFIG } from '../utils/constants';
 let zegoInstance = null;
 let userHasJoined = false;
 let isDestroying = false;
+const JOIN_TIMEOUT_MS = 45000;
 
 const getMediaErrorMessage = (error) => {
     const errorName = error?.name || '';
@@ -30,20 +31,25 @@ const getMediaErrorMessage = (error) => {
 
 const getReadableZegoError = (error) => {
     const message = `${error?.message || error?.msg || error?.content || error || ''}`;
+    const lowerMessage = message.toLowerCase();
 
     if (!ZEGO_CONFIG.SERVER_SECRET) {
         return 'ZEGO server secret is missing. Add REACT_APP_ZEGO_SERVER_SECRET in client/.env and restart the app.';
     }
 
-    if (message.includes('1102016') || message.toLowerCase().includes('liveroom error')) {
+    if (lowerMessage.includes('notallowederror') || lowerMessage.includes('permission denied')) {
+        return 'Camera or microphone permission denied. Please allow access in your browser settings and try again.';
+    }
+
+    if (message.includes('1102016') || lowerMessage.includes('liveroom error')) {
         return 'Unable to join the ZEGO room. Please verify REACT_APP_ZEGO_APP_ID and REACT_APP_ZEGO_SERVER_SECRET.';
     }
 
-    if (message.includes('200014') || message.toLowerCase().includes('token')) {
+    if (message.includes('200014') || lowerMessage.includes('token')) {
         return 'ZEGO token authentication failed. Please verify the ZEGO App ID and Server Secret.';
     }
 
-    if (message.toLowerCase().includes('notreadableerror') || message.toLowerCase().includes('device is not readable')) {
+    if (lowerMessage.includes('notreadableerror') || lowerMessage.includes('device is not readable')) {
         return 'Camera or microphone is busy in another app on this phone. Close the other app and try again.';
     }
 
@@ -81,7 +87,7 @@ export const generateKitToken = (roomId,userId,userName) => {
         return kitToken;
     } catch (error) {
         console.error('Token generation error', error);
-        throw new Error(`Failed to generate zego token', ${error.message}`)
+        throw new Error(`Failed to generate zego token: ${error.message}`)
     }
 }
 
@@ -209,8 +215,8 @@ export const joinRoom = async(roomId,userId,userName,container,onJoinCallback,on
 
             const joinTimeout = setTimeout(() => {
                 clearTimeout(joinTimeout);
-                settleFailure(new Error('Timed out while joining the video room.'));
-            }, 15000);
+                settleFailure(new Error('Timed out while joining the video room. If the pre-join screen is visible, click "Join" to continue.'));
+            }, JOIN_TIMEOUT_MS);
 
             zp.joinRoom({
                 container:container,
@@ -260,9 +266,15 @@ export const joinRoom = async(roomId,userId,userName,container,onJoinCallback,on
         }
         zegoInstance = null;
         userHasJoined=false;
-        throw new Error(mediaPermissionReason && !hasPermission
-            ? `${error.message} ${mediaPermissionReason}`
-            : error.message)
+        const message = error?.message || 'Failed to join the video room.';
+        if (mediaPermissionReason && !hasPermission) {
+            if (message.toLowerCase().includes('timed out')) {
+                throw new Error(mediaPermissionReason);
+            }
+            throw new Error(`${message} ${mediaPermissionReason}`);
+        }
+
+        throw new Error(message);
     }
     return zp;
 }
