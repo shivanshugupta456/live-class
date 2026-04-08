@@ -6,6 +6,8 @@ let zegoInstance = null;
 let userHasJoined = false;
 let isDestroying = false;
 const JOIN_TIMEOUT_MS = 45000;
+const APP_ID_RAW = `${ZEGO_CONFIG.APP_ID ?? ''}`.trim();
+const SERVER_SECRET_RAW = `${ZEGO_CONFIG.SERVER_SECRET ?? ''}`.trim();
 
 const getMediaErrorMessage = (error) => {
     const errorName = error?.name || '';
@@ -33,7 +35,7 @@ const getReadableZegoError = (error) => {
     const message = `${error?.message || error?.msg || error?.content || error || ''}`;
     const lowerMessage = message.toLowerCase();
 
-    if (!ZEGO_CONFIG.SERVER_SECRET) {
+    if (!SERVER_SECRET_RAW) {
         return 'ZEGO server secret is missing. Add REACT_APP_ZEGO_SERVER_SECRET in client/.env and restart the app.';
     }
 
@@ -58,15 +60,15 @@ const getReadableZegoError = (error) => {
 
 
 export const generateKitToken = (roomId,userId,userName) => {
-    if(!ZEGO_CONFIG.APP_ID){
+    if(!APP_ID_RAW){
         throw new Error('ZEGOCLOUD App Id not configured. Please set the value in env')
     }
 
-    if(!ZEGO_CONFIG.SERVER_SECRET){
+    if(!SERVER_SECRET_RAW){
         throw new Error('ZEGOCLOUD Server Secret not configured. Please set REACT_APP_ZEGO_SERVER_SECRET in env')
     }
 
-    const appId = parseInt(ZEGO_CONFIG.APP_ID);
+    const appId = parseInt(APP_ID_RAW, 10);
     if(isNaN(appId)){
         throw new Error('Invalid Zegocloud app id .Must be in number')
     }
@@ -74,7 +76,7 @@ export const generateKitToken = (roomId,userId,userName) => {
     try {
         const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest( 
             appId,
-            ZEGO_CONFIG.SERVER_SECRET || '',
+            SERVER_SECRET_RAW,
             roomId,
             userId.toString(),
             userName || `User_${userId}`
@@ -131,7 +133,7 @@ export const joinRoom = async(roomId,userId,userName,container,onJoinCallback,on
     }
 
 
-    if(!ZEGO_CONFIG.APP_ID){
+    if(!APP_ID_RAW){
         throw new Error('Zegocloud App Id is not configured')
     }
 
@@ -202,6 +204,7 @@ export const joinRoom = async(roomId,userId,userName,container,onJoinCallback,on
 
         await new Promise((resolve, reject) => {
             let settled = false;
+            let latestJoinErrorMessage = '';
             const settleSuccess = () => {
                 if (settled) return;
                 settled = true;
@@ -215,7 +218,7 @@ export const joinRoom = async(roomId,userId,userName,container,onJoinCallback,on
 
             const joinTimeout = setTimeout(() => {
                 clearTimeout(joinTimeout);
-                settleFailure(new Error('Timed out while joining the video room. If the pre-join screen is visible, click "Join" to continue.'));
+                settleFailure(new Error(latestJoinErrorMessage || 'Timed out while joining the video room. Please verify ZEGO credentials and network.'));
             }, JOIN_TIMEOUT_MS);
 
             zp.joinRoom({
@@ -248,8 +251,9 @@ export const joinRoom = async(roomId,userId,userName,container,onJoinCallback,on
                 },
                 onError: (error) => {
                     clearTimeout(joinTimeout);
+                    latestJoinErrorMessage = getReadableZegoError(error);
                     console.error('ZEGO room error', error)
-                    settleFailure(new Error(getReadableZegoError(error)));
+                    settleFailure(new Error(latestJoinErrorMessage));
                 },
             });
         });
