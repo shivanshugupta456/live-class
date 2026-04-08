@@ -12,17 +12,6 @@ dotenv.config();
 
 
 const app =express();
-<<<<<<< HEAD
-const PORT = process.env.PORT;
-
-
-const corsOption = {
-    origin: process.env.CLIENT_URL,
-    credentials:true
-}
-
-connectDb();
-=======
 const PORT = process.env.PORT || 5000;
 
 
@@ -45,7 +34,6 @@ const corsOption = {
   },
   credentials: true,
 }
->>>>>>> 4030e73 (hekko)
 
 app.use(cors(corsOption));
 app.use(express.json())
@@ -65,11 +53,6 @@ app.use('/api/session',sessionRoute)
 
 app.use(errorHandler)
 
-<<<<<<< HEAD
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
-})
-=======
 const startServer = async () => {
   try {
     await connectDb();
@@ -83,4 +66,3 @@ const startServer = async () => {
 };
 
 startServer();
->>>>>>> 4030e73 (hekko)
